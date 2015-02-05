@@ -26,3 +26,7 @@ Ruby 2.2.0 & Rails 4.2
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+{<img src="https://codeclimate.com/github/wjp2013/SmartShop/badges/gpa.svg" />}[https://codeclimate.com/github/wjp2013/SmartShop]
+
+{<img src="https://codeclimate.com/github/wjp2013/SmartShop/badges/coverage.svg" />}[https://codeclimate.com/github/wjp2013/SmartShop]

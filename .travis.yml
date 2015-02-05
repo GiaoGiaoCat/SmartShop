@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+  - 2.2.0
+notifications:
+  email:
+    recipients:
+      - wjp2013@gmail.com
+branches:
+  only:
+    - master
+    - develop
