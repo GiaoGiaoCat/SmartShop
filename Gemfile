@@ -42,6 +42,11 @@ group :development, :test do
   gem 'spring'
 end
 
+group :development do
+  gem 'rubocop', require: false
+  gem 'haml-lint', require: false
+end
+
 group :test do
   gem "codeclimate-test-reporter"
 end
