@@ -1,27 +1,27 @@
-== README
+## README
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-=== Ruby and Rails version
+### Ruby and Rails version
 
 Ruby 2.2.0 & Rails 4.2
 
-=== System dependencies
+### System dependencies
 
-=== Configuration
+### Configuration
 
-=== Database creation
+### Database creation
 
-=== Database initialization
+### Database initialization
 
-=== How to run the test suite
+### How to run the test suite
 
-=== Services (job queues, cache servers, search engines, etc.)
+### Services (job queues, cache servers, search engines, etc.)
 
-=== Deployment instructions
+### Deployment instructions
 
-=== Others
+### Others
 
 * [TravisCI](https://travis-ci.org/wjp2013/SmartShop) - 持续集成
 * [rubocop](https://github.com/bbatsov/rubocop) - 本地代码质量检查
