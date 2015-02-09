@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209130255) do
+ActiveRecord::Schema.define(version: 20150209132813) do
 
   create_table "option_types", force: :cascade do |t|
     t.string   "name",         limit: 100
@@ -22,6 +22,30 @@ ActiveRecord::Schema.define(version: 20150209130255) do
   end
 
   add_index "option_types", ["position"], name: "index_option_types_on_position"
+
+  create_table "option_values", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "position"
+    t.string   "presentation"
+    t.integer  "option_type_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "option_values", ["option_type_id"], name: "index_option_values_on_option_type_id"
+  add_index "option_values", ["position"], name: "index_option_values_on_position"
+
+  create_table "product_option_types", force: :cascade do |t|
+    t.integer  "option_type_id"
+    t.integer  "product_id"
+    t.integer  "position"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "product_option_types", ["option_type_id"], name: "index_product_option_types_on_option_type_id"
+  add_index "product_option_types", ["position"], name: "index_product_option_types_on_position"
+  add_index "product_option_types", ["product_id"], name: "index_product_option_types_on_product_id"
 
   create_table "product_properties", force: :cascade do |t|
     t.string   "value"

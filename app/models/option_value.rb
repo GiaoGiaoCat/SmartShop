@@ -1,32 +1,28 @@
-class OptionType < ActiveRecord::Base
+class OptionValue < ActiveRecord::Base
   # extends ...................................................................
   # includes ..................................................................
+  acts_as_list scope: :option_type
   # relationships .............................................................
-  has_many :option_values, -> { order(:position) }, dependent: :destroy, inverse_of: :option_type
-  has_many :product_option_types, dependent: :destroy, inverse_of: :option_type
-  has_many :products, through: :product_option_types
-  # has_and_belongs_to_many :prototypes
+  belongs_to :option_type, class_name: 'Spree::OptionType', touch: true, inverse_of: :option_values
+  # has_and_belongs_to_many :variants, join_table: 'spree_option_values_variants', class_name: "Spree::Variant"
   # validations ...............................................................
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :option_type_id }
   validates :presentation, presence: true
   # callbacks .................................................................
-  after_touch :touch_all_products
+  # after_touch :touch_all_variants
   # scopes ....................................................................
-  default_scope { order(:position) }
   # additional config (i.e. accepts_nested_attribute_for etc...) ..............
-  # accepts_nested_attributes_for :option_values, reject_if: lambda { |ov| ov[:name].blank? || ov[:presentation].blank? }, allow_destroy: true
   # class methods .............................................................
   # public instance methods ...................................................
   # protected instance methods ................................................
   # private instance methods ..................................................
-  private
+  # private
 
-  def touch_all_products
-    products.each(&:touch)
-  end
+  # def touch_all_variants
+  #   variants.each(&:touch)
+  #   variants.update_all(updated_at: Time.current)
+  # end
 end
-
-
 
 
 

@@ -8,7 +8,7 @@ class Property < ActiveRecord::Base
   # validations ...............................................................
   validates :name, :presentation, presence: true
   # callbacks .................................................................
-  # after_touch :touch_all_products
+  after_touch :touch_all_products
   # scopes ....................................................................
   scope :sorted, -> { order(:name) }
   # additional config (i.e. accepts_nested_attribute_for etc...) ..............
@@ -16,10 +16,9 @@ class Property < ActiveRecord::Base
   # public instance methods ...................................................
   # protected instance methods ................................................
   # private instance methods ..................................................
-  # private
-  # def touch_all_products
-  #   products.each(&:touch)
-  #   or
-  #   products.update_all(updated_at: Time.current)
-  # end
+  private
+
+  def touch_all_products
+    products.each(&:touch)
+  end
 end
