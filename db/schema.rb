@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150208141842) do
+ActiveRecord::Schema.define(version: 20150209130255) do
+
+  create_table "option_types", force: :cascade do |t|
+    t.string   "name",         limit: 100
+    t.string   "presentation", limit: 100
+    t.integer  "position",                 default: 0, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "option_types", ["position"], name: "index_option_types_on_position"
 
   create_table "product_properties", force: :cascade do |t|
     t.string   "value"
