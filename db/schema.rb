@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209231609) do
+ActiveRecord::Schema.define(version: 20150209232932) do
 
   create_table "option_types", force: :cascade do |t|
     t.string   "name",         limit: 100
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(version: 20150209231609) do
     t.datetime "available_on"
     t.datetime "deleted_at"
     t.string   "meta_title"
-    t.text     "meta_description"
     t.string   "meta_keywords"
+    t.text     "meta_description"
     t.boolean  "promotionable",    default: true
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
@@ -92,5 +92,27 @@ ActiveRecord::Schema.define(version: 20150209231609) do
   end
 
   add_index "taxonomies", ["position"], name: "index_taxonomies_on_position"
+
+  create_table "taxons", force: :cascade do |t|
+    t.string   "name",                         null: false
+    t.string   "meta_title"
+    t.string   "meta_keywords"
+    t.text     "meta_description"
+    t.text     "description"
+    t.integer  "position",         default: 0
+    t.integer  "taxonomy_id"
+    t.integer  "parent_id"
+    t.integer  "lft",                          null: false
+    t.integer  "rgt",                          null: false
+    t.integer  "depth",                        null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "taxons", ["lft"], name: "index_taxons_on_lft"
+  add_index "taxons", ["parent_id"], name: "index_taxons_on_parent_id"
+  add_index "taxons", ["position"], name: "index_taxons_on_position"
+  add_index "taxons", ["rgt"], name: "index_taxons_on_rgt"
+  add_index "taxons", ["taxonomy_id"], name: "index_taxons_on_taxonomy_id"
 
 end
