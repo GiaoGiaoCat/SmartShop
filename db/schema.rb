@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209132813) do
+ActiveRecord::Schema.define(version: 20150209231609) do
 
   create_table "option_types", force: :cascade do |t|
     t.string   "name",         limit: 100
@@ -83,5 +83,14 @@ ActiveRecord::Schema.define(version: 20150209132813) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "taxonomies", force: :cascade do |t|
+    t.string   "name",                   null: false
+    t.integer  "position",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "taxonomies", ["position"], name: "index_taxonomies_on_position"
 
 end

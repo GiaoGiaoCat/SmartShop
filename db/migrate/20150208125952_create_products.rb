@@ -6,8 +6,8 @@ class CreateProducts < ActiveRecord::Migration
       t.datetime :available_on, index: true
       t.datetime :deleted_at, index: true
       t.string   :meta_title
-      t.text     :meta_description
       t.string   :meta_keywords
+      t.text     :meta_description
       # t.integer  :tax_category_id
       # t.integer  :shipping_category_id
       # t.string   :slug

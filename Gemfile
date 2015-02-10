@@ -32,6 +32,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 gem 'paranoia', '~> 2.1.0'
 gem 'acts_as_list', '~> 0.6'
+gem 'awesome_nested_set', '~> 3.0.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
