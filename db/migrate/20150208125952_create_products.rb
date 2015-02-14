@@ -8,6 +8,7 @@ class CreateProducts < ActiveRecord::Migration
       t.string   :meta_title
       t.string   :meta_keywords
       t.text     :meta_description
+      t.string   :spu, default: "", null: false
       # t.integer  :tax_category_id
       # t.integer  :shipping_category_id
       # t.string   :slug

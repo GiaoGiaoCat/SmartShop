@@ -6,7 +6,8 @@ class Taxon < ActiveRecord::Base
   belongs_to :taxonomy, inverse_of: :taxons
   has_many :classifications, -> { order(:position) }, dependent: :delete_all, inverse_of: :taxon
   has_many :products, through: :classifications
-  # has_and_belongs_to_many :prototypes
+
+  has_and_belongs_to_many :prototypes
   # validations ...............................................................
   validates :name, presence: true
   validates :meta_keywords, length: { maximum: 255 }
