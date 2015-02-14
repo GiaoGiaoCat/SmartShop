@@ -1,4 +1,4 @@
-class CreateRoductsTaxons < ActiveRecord::Migration
+class CreateProductsTaxons < ActiveRecord::Migration
   def change
     create_table :products_taxons do |t|
       t.references  :product, index: true

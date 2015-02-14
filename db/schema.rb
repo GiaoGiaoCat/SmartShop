@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209232932) do
+ActiveRecord::Schema.define(version: 20150214145535) do
 
   create_table "option_types", force: :cascade do |t|
     t.string   "name",         limit: 100
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20150209232932) do
   end
 
   add_index "option_types", ["position"], name: "index_option_types_on_position"
+
+  create_table "option_types_prototypes", id: false, force: :cascade do |t|
+    t.integer "prototype_id"
+    t.integer "option_type_id"
+  end
+
+  add_index "option_types_prototypes", ["option_type_id"], name: "index_option_types_prototypes_on_option_type_id"
+  add_index "option_types_prototypes", ["prototype_id"], name: "index_option_types_prototypes_on_prototype_id"
 
   create_table "option_values", force: :cascade do |t|
     t.string   "name"
@@ -34,6 +42,14 @@ ActiveRecord::Schema.define(version: 20150209232932) do
 
   add_index "option_values", ["option_type_id"], name: "index_option_values_on_option_type_id"
   add_index "option_values", ["position"], name: "index_option_values_on_position"
+
+  create_table "option_values_variants", id: false, force: :cascade do |t|
+    t.integer "variant_id"
+    t.integer "option_value_id"
+  end
+
+  add_index "option_values_variants", ["variant_id", "option_value_id"], name: "index_option_values_variants_on_variant_id_and_option_value_id"
+  add_index "option_values_variants", ["variant_id"], name: "index_option_values_variants_on_variant_id"
 
   create_table "product_option_types", force: :cascade do |t|
     t.integer  "option_type_id"
@@ -77,11 +93,35 @@ ActiveRecord::Schema.define(version: 20150209232932) do
   add_index "products", ["deleted_at"], name: "index_products_on_deleted_at"
   add_index "products", ["name"], name: "index_products_on_name"
 
+  create_table "products_taxons", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "taxon_id"
+    t.integer "position",   default: 0
+  end
+
+  add_index "products_taxons", ["position"], name: "index_products_taxons_on_position"
+  add_index "products_taxons", ["product_id"], name: "index_products_taxons_on_product_id"
+  add_index "products_taxons", ["taxon_id"], name: "index_products_taxons_on_taxon_id"
+
   create_table "properties", force: :cascade do |t|
     t.string   "name"
     t.string   "presentation", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "properties_prototypes", id: false, force: :cascade do |t|
+    t.integer "prototype_id"
+    t.integer "property_id"
+  end
+
+  add_index "properties_prototypes", ["property_id"], name: "index_properties_prototypes_on_property_id"
+  add_index "properties_prototypes", ["prototype_id"], name: "index_properties_prototypes_on_prototype_id"
+
+  create_table "prototypes", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "taxonomies", force: :cascade do |t|
@@ -114,5 +154,30 @@ ActiveRecord::Schema.define(version: 20150209232932) do
   add_index "taxons", ["position"], name: "index_taxons_on_position"
   add_index "taxons", ["rgt"], name: "index_taxons_on_rgt"
   add_index "taxons", ["taxonomy_id"], name: "index_taxons_on_taxonomy_id"
+
+  create_table "taxons_prototypes", id: false, force: :cascade do |t|
+    t.integer "taxon_id"
+    t.integer "prototype_id"
+  end
+
+  add_index "taxons_prototypes", ["prototype_id"], name: "index_taxons_prototypes_on_prototype_id"
+  add_index "taxons_prototypes", ["taxon_id"], name: "index_taxons_prototypes_on_taxon_id"
+
+  create_table "variants", force: :cascade do |t|
+    t.string   "sku",                                 default: "",    null: false
+    t.datetime "deleted_at"
+    t.boolean  "is_master",                           default: false
+    t.decimal  "cost_price", precision: 10, scale: 2
+    t.integer  "position"
+    t.integer  "product_id"
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+  end
+
+  add_index "variants", ["deleted_at"], name: "index_variants_on_deleted_at"
+  add_index "variants", ["is_master"], name: "index_variants_on_is_master"
+  add_index "variants", ["position"], name: "index_variants_on_position"
+  add_index "variants", ["product_id"], name: "index_variants_on_product_id"
+  add_index "variants", ["sku"], name: "index_variants_on_sku"
 
 end
