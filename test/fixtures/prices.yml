@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  variant_id: 1
+  amount: MyString
+  type: 
+  deleted_at: 2015-02-27 23:05:36
+
+two:
+  variant_id: 1
+  amount: MyString
+  type: 
+  deleted_at: 2015-02-27 23:05:36

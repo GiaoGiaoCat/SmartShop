@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150214145535) do
+ActiveRecord::Schema.define(version: 20150227150536) do
 
   create_table "option_types", force: :cascade do |t|
     t.string   "name",         limit: 100
@@ -50,6 +50,18 @@ ActiveRecord::Schema.define(version: 20150214145535) do
 
   add_index "option_values_variants", ["variant_id", "option_value_id"], name: "index_option_values_variants_on_variant_id_and_option_value_id"
   add_index "option_values_variants", ["variant_id"], name: "index_option_values_variants_on_variant_id"
+
+  create_table "prices", force: :cascade do |t|
+    t.integer  "variant_id",                          null: false
+    t.decimal  "amount",     precision: 10, scale: 2
+    t.string   "type"
+    t.datetime "deleted_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "prices", ["deleted_at"], name: "index_prices_on_deleted_at"
+  add_index "prices", ["variant_id", "type"], name: "index_prices_on_variant_id_and_type"
 
   create_table "product_option_types", force: :cascade do |t|
     t.integer  "option_type_id"
