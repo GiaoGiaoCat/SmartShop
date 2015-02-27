@@ -1,28 +1,26 @@
-class OptionValue < ActiveRecord::Base
+class Price < ActiveRecord::Base
   # extends ...................................................................
+  acts_as_paranoid
   # includes ..................................................................
-  acts_as_list scope: :option_type
+  # include Spree::DefaultPrice
   # relationships .............................................................
-  belongs_to :option_type, touch: true, inverse_of: :option_values
-  has_and_belongs_to_many :variants
+  belongs_to :variant, inverse_of: :prices, touch: true
   # validations ...............................................................
-  validates :name, presence: true, uniqueness: { scope: :option_type_id }
-  validates :presentation, presence: true
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   # callbacks .................................................................
-  # after_touch :touch_all_variants
   # scopes ....................................................................
   # additional config (i.e. accepts_nested_attribute_for etc...) ..............
   # class methods .............................................................
   # public instance methods ...................................................
+  # def money
+  #   Spree::Money.new(amount || 0, { currency: currency })
+  # end
+  # def price
+  #   amount
+  # end
+  # def price=(price)
+  #   self[:amount] = Spree::LocalizedNumber.parse(price)
+  # end
   # protected instance methods ................................................
   # private instance methods ..................................................
-  # private
-
-  # def touch_all_variants
-  #   variants.each(&:touch)
-  #   variants.update_all(updated_at: Time.current)
-  # end
 end
-
-
-

@@ -1,28 +1,23 @@
-class OptionValue < ActiveRecord::Base
+class Variant < ActiveRecord::Base
   # extends ...................................................................
+  acts_as_paranoid
   # includes ..................................................................
-  acts_as_list scope: :option_type
+  # include Spree::DefaultPrice
   # relationships .............................................................
-  belongs_to :option_type, touch: true, inverse_of: :option_values
-  has_and_belongs_to_many :variants
+  belongs_to :product, touch: true, inverse_of: :variants
+  has_and_belongs_to_many :option_values
+
+  has_many :prices, dependent: :destroy, inverse_of: :variant
   # validations ...............................................................
-  validates :name, presence: true, uniqueness: { scope: :option_type_id }
-  validates :presentation, presence: true
+  validates_uniqueness_of :sku, allow_blank: true, conditions: -> { where(deleted_at: nil) }
   # callbacks .................................................................
-  # after_touch :touch_all_variants
   # scopes ....................................................................
   # additional config (i.e. accepts_nested_attribute_for etc...) ..............
+  # delegate_belongs_to :product, :name, :description, :slug, :available_on,
+  #                   :shipping_category_id, :meta_description, :meta_keywords,
+  #                   :shipping_category
   # class methods .............................................................
   # public instance methods ...................................................
   # protected instance methods ................................................
   # private instance methods ..................................................
-  # private
-
-  # def touch_all_variants
-  #   variants.each(&:touch)
-  #   variants.update_all(updated_at: Time.current)
-  # end
 end
-
-
-
