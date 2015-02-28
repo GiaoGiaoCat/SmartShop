@@ -33,6 +33,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'paranoia', '~> 2.1.0'
 gem 'acts_as_list', '~> 0.6'
 gem 'awesome_nested_set', '~> 3.0.2'
+gem 'font-awesome-rails'
+gem 'haml'
+# gem 'simple_form', github: 'plataformatec/simple_form'
+# Dynamic nested forms
+gem "cocoon"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,6 +53,7 @@ end
 group :development do
   gem 'rubocop', require: false
   gem 'haml-lint', require: false
+  gem 'haml-rails'
 end
 
 group :test do
